@@ -2,7 +2,6 @@
 " Language:	Eiffel
 " Maintainer:	Doug Kearns <dougkearns@gmail.com>
 " Last Change:	2010 Aug 29
-" URL:		https://github.com/eiffelhub/vim-eiffel
 
 if (exists("b:did_ftplugin"))
   finish
