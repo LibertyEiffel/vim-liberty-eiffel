@@ -63,9 +63,6 @@ syn keyword eiffelDeclaration	alias assign attribute deferred do external local 
 syn keyword eiffelDeclaration	alias contained containedin=eiffelInheritClause
 syn keyword eiffelDeclaration	convert contained containedin=eiffelInheritClause,@eiffelFeature
 syn match   eiffelDeclaration	"\<\%(obsolete\|note\)\>" contained containedin=@eiffelFeature
-if exists("eiffel_liberty")
-  syn match   eiffelDeclaration	"\<indexing\>" contained containedin=@eiffelFeature
-end
 syn match   eiffelDeclaration	"\<once\>"
 if !exists("eiffel_liberty")
   syn keyword eiffelAttachment	attached detachable
@@ -248,37 +245,35 @@ syn cluster eiffelTopClauses contains=eiffelNoteClause,eiffelClassClause,eiffelO
 
 if exists("eiffel_liberty")
   let s:inherit = 'inherit\|insert'
-  let s:note	= '\%(note\|indexing\)'
 else
   let s:inherit = "inherit"
-  let s:note	= "note"
 end
 
-call s:MakeTopClause("Note", '\<' . s:note . '\>',
+call s:MakeTopClause("Note", '\<note\>',
 		   \ ['\ze\<class\>',
 		   \  '\ze\<deferred\s\+class\>',
 		   \  '\ze\<\%(\%\(frozen\)\=\s*\%(expanded\)\=\s*\%(external\)\=\)\s\+class\>'],
 		   \ "@eiffelConstant,eiffelSpecialNoteName,@eiffelComment")
 call s:MakeTopClause("Class", '\<class\>',
-		   \ ['\ze\<\%(obsolete\|' . s:inherit . '\|create\|convert\|feature\|invariant\)\>', '\ze;\=' . s:note . '\>'],
+		   \ ['\ze\<\%(obsolete\|' . s:inherit . '\|create\|convert\|feature\|invariant\)\>', '\ze;\=note\>'],
 		   \ "@eiffelComment")
 call s:MakeTopClause("Obsolete", '\<obsolete\>',
-		   \ ['\ze\<\%(' . s:inherit . '\|create\|convert\|feature\|invariant\)\>', '\ze;\=' . s:note . '\>'],
+		   \ ['\ze\<\%(' . s:inherit . '\|create\|convert\|feature\|invariant\)\>', '\ze;\=note\>'],
 		   \ "@eiffelString,@eiffelComment")
 call s:MakeTopClause("Inherit", '\<\%(' . s:inherit . '\)\>',
-		   \ ['\ze\<\%(' . s:inherit . '\|create\|_convert\|feature\|invariant\)\>', '^\zeconvert\>', '\ze;\=' . s:note . '\>'],
+		   \ ['\ze\<\%(' . s:inherit . '\|create\|_convert\|feature\|invariant\)\>', '^\zeconvert\>', '\ze;\=note\>'],
 		   \ "eiffelClassName,eiffelInherit,eiffelKeyword,eiffelClients,eiffelSpecialFeatureSet,@eiffelString,@eiffelComment")
 call s:MakeTopClause("Create", '\<create\>',
-		   \ ['\ze\<\%(create\|convert\|feature\|invariant\)\>', '\ze;\=' . s:note . '\>'],
+		   \ ['\ze\<\%(create\|convert\|feature\|invariant\)\>', '\ze;\=note\>'],
 		   \ "TOP,@eiffelTopClauses")
 call s:MakeTopClause("Convert", '\<convert\>',
-		   \ ['\ze\<\%(feature\|invariant\)\>', '\ze;\=' . s:note . '\>'],
+		   \ ['\ze\<\%(feature\|invariant\)\>', '\ze;\=note\>'],
 		   \ "eiffelTypeBrace,eiffelClassName,eiffelAttachment,@eiffelComment")
 call s:MakeTopClause("Feature", '\<feature\>',
-		   \ ['\ze\%(\<feature\|^invariant\)\>', '^\ze;\=' . s:note . '\>'],
+		   \ ['\ze\%(\<feature\|^invariant\)\>', '^\ze;\=note\>'],
 		   \ "TOP,@eiffelTopClauses")
 call s:MakeTopClause("Invariant", '\<invariant\>',
-		   \ ['\ze;\=' . s:note . '\>'],
+		   \ ['\ze;\=note\>'],
 		   \ "TOP,@eiffelTopClauses")
 
 " Features {{{1
