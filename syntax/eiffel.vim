@@ -196,14 +196,19 @@ else
 end
 syn cluster eiffelCharacter		contains=eiffelCharacter,eiffelCharacterError
 
-if !exists("eiffel_liberty")
+if exists("eiffel_liberty")
+  syn match   eiffelInteger		"-\=\<\d\+\%(_\d\{3}\)*\>"
+  syn match   eiffelInteger		"\c-\=\<0x\%(\x\{2}\|\x\{4}\|\x\{8}\|\x\{16}\)\>"
+  syn match   eiffelReal		"-\=\<\d\+\%(_\d\+\)*\%(\.\d\+\)\+\%([eE][-+]\=\d\+\)\="
+  " TODO: errors for 1. and .1? Possibly too annoying for interactive typing.
+else
   syn match   eiffelInteger		"\c-\=\<0b[01]\+\%(_[01]\+\)*\>"
   syn match   eiffelInteger		"\c-\=\<0c\o\+\%(_\o\+\)*\>"
-end
-syn match   eiffelInteger		"-\=\<\d\+\%(_\d\+\)*\>"
-syn match   eiffelInteger		"\c-\=\<0x\x\+\%(_\x\+\)*\>"
-syn match   eiffelReal			"-\=\<\d\+\%(_\d\+\)*\.\%(\d\+\%(_\d\+\)*\)\=\%([eE][-+]\=\d\+\%(_\d\+\)*\)\="
-syn match   eiffelReal			"-\=\.\d\+\%(_\d\+\)*\%([eE][-+]\=\d\+\%(_\d\+\)*\)\="
+  syn match   eiffelInteger		"\c-\=\<0x\x\+\%(_\x\+\)*\>"
+  syn match   eiffelInteger		"-\=\<\d\+\%(_\d\+\)*\>"
+  syn match   eiffelReal		"-\=\<\d\+\%(_\d\+\)*\.\%(\d\+\%(_\d\+\)*\)\=\%([eE][-+]\=\d\+\%(_\d\+\)*\)\="
+  syn match   eiffelReal		"-\=\.\d\+\%(_\d\+\)*\%([eE][-+]\=\d\+\%(_\d\+\)*\)\="
+endif
 syn cluster eiffelNumber		contains=eiffelInteger,eiffelReal
 
 syn region  eiffelArray			matchgroup=eiffelArrayDelimiter start="<<" end=">>" transparent fold
