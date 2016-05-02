@@ -13,7 +13,7 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
-setlocal indentexpr=GetEiffelIndent()
+setlocal indentexpr=GetEiffelIndent(lnum)
 setlocal nolisp
 setlocal nosmartindent
 setlocal nocindent
@@ -43,12 +43,12 @@ endif
 let s:keepcpo= &cpo
 set cpo&vim
 
-function GetEiffelIndent()
+function GetEiffelIndent(lnum)
 
   " Eiffel Class indenting
   "
   " Find a non-blank line above the current line.
-  let lnum = prevnonblank(v:lnum - 1)
+  let lnum = prevnonblank(a:lnum - 1)
 
   " At the start of the file use zero indent.
   if lnum == 0
@@ -67,13 +67,13 @@ function GetEiffelIndent()
   endif
 
   " Indent to single indent
-  if getline(v:lnum) =~ s:single_dent && getline(v:lnum) !~ s:relative_indent
-	   \ && getline(v:lnum) !~ '\s*\<\(and\|or\|implies\)\>'
+  if getline(a:lnum) =~ s:single_dent && getline(a:lnum) !~ s:relative_indent
+	   \ && getline(a:lnum) !~ '\s*\<\(and\|or\|implies\)\>'
      let ind = &sw
   endif
 
   " Indent to double indent
-  if getline(v:lnum) =~ s:inheritance_dent
+  if getline(a:lnum) =~ s:inheritance_dent
      let ind = 2 * &sw
   endif
 
@@ -83,25 +83,25 @@ function GetEiffelIndent()
   endif
 
   " The following should always be at the start of a line, no indenting
-  if getline(v:lnum) =~ s:no_indent
+  if getline(a:lnum) =~ s:no_indent
      let ind = 0
   endif
 
   " Subtract a 'shiftwidth', if this isn't the first thing after the 'is'
   " or first thing after the 'do'
-  if getline(v:lnum) =~ s:outdent && getline(v:lnum - 1) !~ s:single_dent
-	\ && getline(v:lnum - 1) !~ '^\s*do\>'
+  if getline(a:lnum) =~ s:outdent && getline(a:lnum - 1) !~ s:single_dent
+	\ && getline(a:lnum - 1) !~ '^\s*do\>'
     let ind = ind - &sw
   endif
 
   " Subtract a shiftwidth for end statements
-  if getline(v:lnum) =~ '^\s*end\>'
+  if getline(a:lnum) =~ '^\s*end\>'
     let ind = ind - &sw
   endif
 
   " set indent of zero end statements that are at an indent of 3, this should
   " only ever be the class's end.
-  if getline(v:lnum) =~ '^\s*end\>' && ind == &sw
+  if getline(a:lnum) =~ '^\s*end\>' && ind == &sw
     let ind = 0
   endif
 
