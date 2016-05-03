@@ -26,7 +26,7 @@ nnoremap <silent> <buffer> <C-w>gf    :<C-U>call liberty#GotoFileMap(expand("<cw
 nnoremap <silent> <buffer> <C-w>f     :<C-U>call liberty#GotoFileMap(expand("<cword>"), v:count1, "split")<CR>
 nnoremap <silent> <buffer> <C-w><C-f> :<C-U>call liberty#GotoFileMap(expand("<cword>"), v:count1, "split")<CR>
 
-nnoremap <silent> <buffer> gd         :<C-U>call liberty#GotoDeclaration(expand("<cfile>"))<CR>:set invhls<CR>:set invhls<CR>
+nnoremap <silent> <buffer> gd         :<C-U>call liberty#GotoDeclaration(expand("<cword>"))<CR>:set invhls<CR>:set invhls<CR>
 
 " commands {{{1
 command! -nargs=1 -count=1 -bang LEFind call liberty#GotoFile(<f-args>, <count>, "edit<bang>")
