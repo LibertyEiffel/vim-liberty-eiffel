@@ -30,8 +30,8 @@ if exists("loaded_matchit") && !exists("b:match_words")
 		  \	'\<\%(^note\|indexing\|class\|^obsolete\|inherit\|insert\|^create\|convert\|feature\|^invariant\)\>:' .
 		  \   '^end\>,' .
 		  \   '\<\%(do\|deferred\|external\|once\%(\s\+"\)\@!\|check\|debug\|if\|inspect\|from\|across\)\>:' .
-		  \	'\%(\%(^\s\+\)\@<=\%(then\|until\|loop\)\|\%(then\|until\|loop\)\s\+[^ -]\|' .
-		  \	'\<\%(ensure\%(\s\+then\)\=\|rescue\|_then\|elseif\|else\|when\|\s\@<=invariant\|_until\|_loop\|variant\|_as\|alias\)\>\):' .
+		  \	'\%(\%(^\s\+\)\@<=\%(then\|until\|loop\)\|\%(\%(and \)\@4<!then\|until\|loop\)\s\+[^ -]\|' .
+		  \	'\<\%(ensure\%(\s\+then\)\=\|rescue\|elseif\|\%(or \)\@3<!else\|when\|\s\@<=invariant\|variant\|alias\)\>\):' .
 		  \   '\s\@<=end\>'
   let b:match_skip = 's:\<eiffel\%(Comment\|String\|Operator\)\>'
   noremap  [% <Nop>
@@ -93,4 +93,4 @@ endif
 let &cpo = s:cpo_save
 unlet s:cpo_save
 
-" vim: nowrap sw=2 sts=2 ts=8
+" vim: nowrap sw=2 sts=2 ts=8 fdm=marker
