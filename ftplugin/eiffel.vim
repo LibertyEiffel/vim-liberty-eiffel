@@ -33,7 +33,7 @@ if exists("loaded_matchit") && !exists("b:match_words")
 		  \	'\%(\%(^\s\+\)\@<=\%(then\|until\|loop\)\|\%(\%(and \)\@4<!then\|until\|loop\)\s\+[^ -]\|' .
 		  \	'\<\%(ensure\%(\s\+then\)\=\|rescue\|elseif\|\%(or \)\@3<!else\|when\|\s\@<=invariant\|variant\|alias\)\>\):' .
 		  \   '\s\@<=end\>'
-  let b:match_skip = 's:\<eiffel\%(Comment\|String\|Operator\)\>'
+  let b:match_skip = 's:\<eiffel\%(Comment\a*\|\a*String\)\>'
   noremap  [% <Nop>
   noremap  ]% <Nop>
   vnoremap a% <Nop>
