@@ -28,13 +28,13 @@ if exists("eiffel_ignore_case") && !exists("eiffel_liberty")
   syn case ignore
 else
   syn case match
-  if exists("eiffel_pedantic") || exists("eiffel_strict")
+  if exists("eiffel_pedantic") || exists("eiffel_strict") || exists("eiffel_liberty")
     syn keyword eiffelError	current void result precursor
     syn keyword eiffelError	CURRENT VOID RESULT PRECURSOR
     syn keyword eiffelError	none None
     syn keyword eiffelError	TRUE FALSE
   endif
-  if exists("eiffel_pedantic")
+  if exists("eiffel_pedantic") || exists("eiffel_liberty")
     syn keyword eiffelError	true false
     syn match	eiffelError	"\<[a-z_]\+[A-Z][a-zA_Z_]*\>"
     syn match	eiffelError	"\<[A-Z][a-z_]*[A-Z][a-zA-Z_]*\>"
