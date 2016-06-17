@@ -176,6 +176,7 @@ syn region  eiffelString		start=+"\ze.*%\s*\n\s*%+ skip=+%%\|%"+ end=+"+ contain
 if exists("eiffel_liberty")
   syn region  eiffelUnicodeString	start=+U"+		  skip=+%%\|%"+ end=+"+ contains=eiffelPercentCode,eiffelUnicodePercentCode,eiffelPercentCodeError oneline
   syn region  eiffelUnicodeString	start=+U"\ze.*%\s*\n\s*%+ skip=+%%\|%"+ end=+"+ contains=eiffelPercentCode,eiffelUnicodePercentCode,eiffelPercentCodeError,eiffelStringLineWrap fold
+  syn match   eiffelStringInterpolation "#(\d\+)" containedin=eiffelString,eiffelVerbatimString " NOTE: not supported in UNICODE_STRING
   syn cluster eiffelString		add=eiffelUnicodeString
 end
 
@@ -335,6 +336,7 @@ hi def link eiffelCharacter		Character
 hi def link eiffelString		String
 hi def link eiffelUnicodeString		eiffelString
 hi def link eiffelVerbatimString	eiffelString
+hi def link eiffelStringInterpolation	Special
 hi def link eiffelInteger		Number
 hi def link eiffelReal			Float
 
