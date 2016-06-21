@@ -5,7 +5,12 @@
 " Utility functions {{{1
 function! liberty#FindFile(file) abort
   " TODO: handle binary detection separately
-  let output = substitute(system("se find -raw " . a:file), '\n$', "", "")
+  if exists("g:vim_liberty_eiffel_ACE_file")
+    let cmd = "se find " . g:vim_liberty_eiffel_ACE_file . " -raw "
+  else
+    let cmd = "se find -raw "
+  endif
+  let output = substitute(system(cmd . a:file), '\n$', "", "")
   if v:shell_error
     return []
   else
@@ -35,6 +40,20 @@ function! liberty#EchoErrMsg(expr)
   echomsg a:expr
   echohl None
   let v:errmsg = a:expr
+endfunction
+
+function! liberty#SetACEFile(file)
+  if (a:file ==# "NONE")
+    unlet! g:vim_liberty_eiffel_ACE_file
+  else
+    let g:vim_liberty_eiffel_ACE_file = a:file
+  endif
+endfunction
+
+function! liberty#CompleteACEFile(A, L, P)
+  let prefix = fnameescape(a:A)
+  let files = glob(prefix . '*/', 0, 1)
+  return extend(files, glob(prefix . '*.ace', 0, 1))
 endfunction
 
 " Command and Mapping Actions {{{1

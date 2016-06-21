@@ -30,5 +30,6 @@ nnoremap <silent> <buffer> gd         :<C-U>call liberty#GotoDeclaration(expand(
 
 " commands {{{1
 command! -nargs=1 -count=1 -bang LEFind call liberty#GotoFile(<f-args>, <count>, "edit<bang>")
+command! -nargs=1 -complete=customlist,liberty#CompleteACEFile LESetACE call liberty#SetACEFile(<q-args>)
 
 " vim: nowrap sw=2 sts=2 ts=8 fdm=marker
