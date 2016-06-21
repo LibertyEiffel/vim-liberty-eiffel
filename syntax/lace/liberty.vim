@@ -1,12 +1,12 @@
 " Vim syntax file
 " Language:	Liberty Eiffel ACE
 " Maintainer:	Doug Kearns <dougkearns@gmail.com>
-" Last Change:	2016 Apr 27
+" Last Change:	2016 Jun 21
 
 syn keyword laceOptionClause no_strip split no_split clean
 syn keyword laceOptionClause assertion_flat_check no_warning verbose
 syn keyword laceOptionClause manifest_string_trace high_memory_compiler
-syn keyword laceOptionClause style_warning no_style_warning relax
+syn keyword laceOptionClause style_warning relax
 
 syn keyword laceOptionMark boost
 
