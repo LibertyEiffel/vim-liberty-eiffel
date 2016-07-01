@@ -1,10 +1,13 @@
 " Vim filetype plugin
 " Language:	Liberty Eiffel
 " Maintainer:	Doug Kearns <dougkearns@gmail.com>
-" Last Change:  2016 May 2
+" Last Change:  2016 Jul 1
 
 " support Liberty Eiffel features in the generalised runtime files
 let eiffel_liberty=1
+
+" compiler {{{1
+compiler se
 
 " syntastic support {{{1
 if exists('g:syntastic_extra_filetypes')
@@ -29,7 +32,7 @@ nnoremap <silent> <buffer> <C-w><C-f> :<C-U>call liberty#GotoFileMap(expand("<cw
 nnoremap <silent> <buffer> gd         :<C-U>call liberty#GotoDeclaration(expand("<cword>"))<CR>:set invhls<CR>:set invhls<CR>
 
 " commands {{{1
-command! -nargs=1 -count=1 -bang LEFind call liberty#GotoFile(<f-args>, <count>, "edit<bang>")
+command! -nargs=1 -count=1 -bang LEFind call liberty#GotoFile(<q-args>, <count>, "edit<bang>")
 command! -nargs=1 -complete=customlist,liberty#CompleteACEFile LESetACE call liberty#SetACEFile(<q-args>)
 
 " vim: nowrap sw=2 sts=2 ts=8 fdm=marker
